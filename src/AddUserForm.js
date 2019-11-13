@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 
 const AddUserForm = props => {
+
+  // FORM INITIALIZER: - Gives a blank slate for empty fields.
   const initialFormState = { id: null, name: '', username: '' }
+
+  // ADDUSERFORM STATE: - This represents the state for this specific form.
+  // We beam up any relevant information for App.js by using props.
   const [user, setUser] = useState(initialFormState)
 
+  // INPUT HANDLER: - This gets called whenever an input is recorded in the form.
   const handleInputChange = event => {
     const { name, value } = event.target
     setUser({ ...user, [name]: value })
@@ -15,7 +21,6 @@ const AddUserForm = props => {
         event.preventDefault()
         if (!user.name || !user.username) return
 
-        // Props is how you both get and send back information.
         props.addUser(user)
         setUser(initialFormState)
       }}

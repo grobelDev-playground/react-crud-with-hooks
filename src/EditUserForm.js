@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from 'react'
 
 const EditUserForm = props => {
+  // FORM STATE: - Although this state is also called 'user', this is the state
+  //               SPECIFICALLY for this form. 
+  // If we wanted the state from App.js we can just use 'props.user'.
   const [user, setUser] = useState(props.currentUser)
 
-  const handleInputChange = event => {
-    const { name, value } = event.target
-
-    setUser({ ...user, [name]: value })
-  }
-
+  // USEEFFECT: - This lets EditUserForm know that the props (from App.js) have changed.
+  // The '[props]' argument lets us know that we are looking for changes in 'props'.
   useEffect(() => {
     setUser(props.currentUser)
   }, [props])
 
+
+  // FORM INPUT: - Any time something is put into the form, this gets called.
+  // We update the state for EditUserForm.
+  const handleInputChange = event => {
+    const { name, value } = event.target
+    setUser({ ...user, [name]: value })
+  }
+
   return (
     <form
       onSubmit={event => {
+        // Stops the page from reloading.
         event.preventDefault()
-
+        // Send the result back to App.js.
         props.updateUser(user.id, user)
       }}
     >
