@@ -98,7 +98,7 @@ export default function App() {
         </div>
 
         {/* This is where the rows are represented, 
-        so most of the functions changing the model are here. */}
+        so most of the state function that change the model are here. */}
         <div className="flex-large">
           <h2>View users</h2>
           <UserTable users={users} editRow={editRow} deleteUser={deleteUser}></UserTable>
