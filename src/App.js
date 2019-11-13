@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import UserTable from './tables/UserTable'
 import AddUserForm from './AddUserForm.js'
 import EditUserForm from './EditUserForm'
@@ -64,7 +64,7 @@ export default function App() {
   }
 
   return (
-    <div className="container">
+    <div className="container" >
       <h1>CRUD App with Hooks</h1>
       <div className="flex-row">
         <div className="flex-large">
@@ -73,12 +73,12 @@ export default function App() {
               As this div gets rerendered on every state change, a conditional is effectively
               a '.hidden' property for a div. */}
           {editing ? (
-            <div>
+            <Fragment>
               <h2>Edit user</h2>
               {/* Here, we are sending our earlier state values (editing, setEditing, etc.) INTO the form. 
                   As an example, we send the READ-ONLY value of 'editing', and ALSO
                   the means for changing that value with our state function 'setEditing'.
-                  
+
                   Accessing those values is as simple as using 'props.editing'
                   when within EditUserForm.js.
               */}
@@ -88,22 +88,23 @@ export default function App() {
                 currentUser={currentUser}
                 updateUser={updateUser}
               />
-            </div>
+            </Fragment>
           ) : (
-              <div>
+              <Fragment>
                 <h2>Add user</h2>
                 <AddUserForm addUser={addUser} />
-              </div>
+              </Fragment>
             )}
         </div>
-
-        {/* This is where the rows are represented, 
-        so most of the state function that change the model are here. */}
         <div className="flex-large">
           <h2>View users</h2>
-          <UserTable users={users} editRow={editRow} deleteUser={deleteUser}></UserTable>
+          {/* 
+            This is where the rows are represented, 
+            so most of the state function that change the model are here. 
+          */}
+          <UserTable users={users} editRow={editRow} deleteUser={deleteUser} />
         </div>
       </div>
-    </div>
+    </div >
   )
 }
